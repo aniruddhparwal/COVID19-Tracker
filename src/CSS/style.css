@@ -6,6 +6,16 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.app__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
@@ -191,5 +201,15 @@
 
 .table tr:nth-of-type(odd) {
   background-color: #f3f2f8;
+}
+
+.footer {
+  font-size: 30px;
+  text-align: center;
+  margin: 10px;
+}
+
+.footer a {
+  text-decoration: none;
 }
 /*# sourceMappingURL=style.css.map */
