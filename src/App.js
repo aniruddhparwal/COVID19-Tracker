@@ -56,8 +56,14 @@ function App() {
       .then(data => {
         setCountry(countryCode)
         setCountryInfo(data)
-        setMapCenter([data.countryInfo.lat, data.countryInfo.long])
-        setMapZoom(4)
+        if (countryCode === 'worldwide') {
+          setMapCenter([34.80746, -40.4796])
+          setMapZoom(3)
+        } else {
+          setMapCenter([data.countryInfo.lat, data.countryInfo.long])
+
+          setMapZoom(4)
+        }
       })
   }
 
@@ -79,9 +85,9 @@ function App() {
           </FormControl>
         </div>
         <div className="app__stats">
-          <InfoBox onClick={e => setCaseType('cases')} title="Coronavirus Cases" cases={prettyPrintStat(countryInfo.todayCases)} total={prettyPrintStat(countryInfo.cases)} />
-          <InfoBox onClick={e => setCaseType('recovered')} title="Recoverd" cases={prettyPrintStat(countryInfo.todayRecovered)} total={prettyPrintStat(countryInfo.recovered)} />
-          <InfoBox onClick={e => setCaseType('deaths')} title="Deaths" cases={prettyPrintStat(countryInfo.todayDeaths)} total={prettyPrintStat(countryInfo.deaths)} />
+          <InfoBox isRed={true} active={caseType === "cases"} onClick={e => setCaseType('cases')} title="Coronavirus Cases" cases={prettyPrintStat(countryInfo.todayCases)} total={prettyPrintStat(countryInfo.cases)} />
+          <InfoBox active={caseType === "recovered"} onClick={e => setCaseType('recovered')} title="Recoverd" cases={prettyPrintStat(countryInfo.todayRecovered)} total={prettyPrintStat(countryInfo.recovered)} />
+          <InfoBox isRed={true} active={caseType === "deaths"} onClick={e => setCaseType('deaths')} title="Deaths" cases={prettyPrintStat(countryInfo.todayDeaths)} total={prettyPrintStat(countryInfo.deaths)} />
         </div>
         <Map
           casesType={caseType}
@@ -94,12 +100,10 @@ function App() {
         <CardContent>
           <h3>Live Cases by Country</h3>
           <Table countries={tableData} />
-          <h3>Worldwide New {caseType}</h3>
-          <LineGraph casesType={caseType} />
+          <h3 className="app__graphTitle">Worldwide New {caseType}</h3>
+          <LineGraph className="app__graph" casesType={caseType} />
         </CardContent>
-
       </Card>
-
     </div >
   );
 }
