@@ -3,7 +3,8 @@ import { Line } from 'react-chartjs-2'
 import numeral from "numeral"
 
 
-function LineGraph({ casesType = "cases" }) {
+function LineGraph({ casesType = "deaths" }) {
+    console.log("linegraph>>", casesType)
     const [data, setData] = useState({})
     //https://disease.sh/v3/covid-19/historical/all?lastdays=120
     const options = {
@@ -75,7 +76,7 @@ function LineGraph({ casesType = "cases" }) {
                 })
         }
         fetchData()
-    }, [])
+    }, [casesType])
 
 
     return (
