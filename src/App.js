@@ -6,6 +6,7 @@ import Map from './Components/Map';
 import './CSS/style.css';
 import { sortData } from './util';
 import LineGraph from './Components/LineGraph';
+import "leaflet/dist/leaflet.css"
 
 function App() {
 
@@ -13,6 +14,8 @@ function App() {
   const [country, setCountry] = useState("worldwide")
   const [countryInfo, setCountryInfo] = useState({})
   const [tableData, setTableData] = useState([]);
+  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 })
+  const [mapZoom, setMapZoom] = useState(3)
 
   useEffect(() => {
     const getCountriesData = async () => {
@@ -75,7 +78,7 @@ function App() {
           <InfoBox title="Recoverd" cases={countryInfo.todayRecovered} total={countryInfo.recovered} />
           <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths} />
         </div>
-        <Map />
+        <Map center={mapCenter} zoom={mapZoom} />
       </div>
       <Card className="app__right">
         <CardContent>
